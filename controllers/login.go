@@ -2,14 +2,15 @@ package controllers
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
+	"sanctum/database"
 	"sanctum/models"
 	"sanctum/response"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	requestBody, err := ioutil.ReadAll(r.Body)
+	requestBody, err := io.ReadAll(r.Body)
 	if err != nil {
 		response.Error(w, http.StatusUnprocessableEntity, err)
 		return
@@ -21,5 +22,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
+	db, err := database.Connect()
+	if err != nil {
+		response.Error(w, http.StatusInternalServerError, err)
+		return
+	}
+	defer db.Close()
 }
