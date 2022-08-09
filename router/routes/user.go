@@ -10,9 +10,15 @@ var userRoutes = []Route{
 		Auth:     false,
 	},
 	{
-		URI: 	"/users",
-		Method: http.MethodGet,
+		URI:      "/users",
+		Method:   http.MethodGet,
 		Function: nil,
-		Auth: true,
+		Auth:     true,
+	},
+	{
+		URI:      "/users/{userID}",
+		Method:   http.MethodGet,
+		Function: nil,
+		Auth:     true,
 	},
 }
