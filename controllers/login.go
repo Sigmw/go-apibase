@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"sanctum/models"
 	"sanctum/response"
 )
 
@@ -13,4 +15,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var user models.User
+	if err := json.Unmarshal(requestBody, &user); err != nil {
+		response.Error(w, http.StatusBadRequest, err)
+		return
+	}
+
+	
 }
