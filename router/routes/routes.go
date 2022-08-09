@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	"sanctum/middleware"
 
 	"github.com/gorilla/mux"
 )
@@ -19,9 +20,9 @@ func Configure(r *mux.Router) *mux.Router {
 
 	for _, route := range routes {
 		if route.Auth {
-			r.Handle(route.URI, nil).Methods(route.Method)
+			r.HandleFunc(route.URI, middleware.Auth(route.Function)).Methods(route.Method)
 		} else {
-			r.HandleFunc(route.URI, nil).Methods(route.Method)
+			r.HandleFunc(route.URI, middleware.Logger(route.Function)).Methods(route.Method)
 		}
 	}
 	return r
