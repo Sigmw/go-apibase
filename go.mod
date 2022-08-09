@@ -1,4 +1,4 @@
-module maypi
+module apibase
 
 go 1.19
 
