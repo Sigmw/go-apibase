@@ -1,4 +1,4 @@
-module sanctum
+module maypi
 
 go 1.19
 
